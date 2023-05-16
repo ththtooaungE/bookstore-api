@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Filters\BookFilter;
 use App\Models\Book;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BookCollection;
@@ -13,9 +14,14 @@ class BookController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new BookCollection(Book::latest('id')->paginate(5));
+        $filter = new BookFilter;
+        $query = $filter->transform($request);
+        // dd($query);
+        // dd(request()->query('title')['eq']);
+        $books = Book::where($query)->latest('id')->paginate(5);
+        return new BookCollection($books);
     }
 
     /**
