@@ -16,18 +16,16 @@ class BookFactory extends Factory
      */
     public function definition(): array
     {
-        $conditions = ['as good as new', 'excellent', 'good', 'fair'];
         $languages = ['English', 'Burmese', 'Chinese', 'Korean', 'Japanese'];
         return [
             'title' => $this->faker->sentence(),
-            'type' => $this->faker->word(),
-            'condition' => $conditions[rand(0,3)],
+            'condition' => rand(1,5),
             'description' => $this->faker->realText(200),
-            'stock' => $this->faker->randomDigit(0,30),
+            'stock' => $this->faker->randomDigit(0,50),
             'price' => $this->faker->numberBetween(2000,30000),
             'author' => $this->faker->name(),
             'language' => $languages[rand(0,4)],
-            'number_of_pages' => $this->faker->numberBetween(20,150),
+            'page' => $this->faker->numberBetween(20,150),
             'publication_date' => $this->faker->dateTimeBetween('-2 years', 'yesterday'),
         ];
     }
