@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Author;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,7 +24,7 @@ class BookFactory extends Factory
             'description' => $this->faker->realText(200),
             'stock' => $this->faker->randomDigit(0,50),
             'price' => $this->faker->numberBetween(2000,30000),
-            'author' => $this->faker->name(),
+            'author_id' =>  Author::factory()->create(),
             'language' => $languages[rand(0,4)],
             'page' => $this->faker->numberBetween(20,150),
             'publication_date' => $this->faker->dateTimeBetween('-2 years', 'yesterday'),

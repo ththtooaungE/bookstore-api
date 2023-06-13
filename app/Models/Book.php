@@ -26,4 +26,8 @@ class Book extends Model
         'publication_date' => 'datetime:Y-m-d'
     ];
 
+    public function author() {
+        return $this->belongsTo(Author::class);
+    }
+
 }

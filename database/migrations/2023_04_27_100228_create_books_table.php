@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('description');
             $table->integer('stock');
             $table->integer('price');
-            $table->string('author');
+            $table->foreignId('author_id');
             $table->string('language');
             $table->integer('page');
             $table->date('publication_date');

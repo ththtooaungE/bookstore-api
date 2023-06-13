@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,4 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['prefix'=>'v1','namespace' => 'App\Http\Controllers\Api'], function() {
     Route::apiResource('books', BookController::class);
+    Route::apiResource('authors', AuthorController::class); 
 });

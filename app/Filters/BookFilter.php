@@ -37,12 +37,18 @@ class BookFilter
             $column = $param;
 
             foreach ($operators as $operator) {
-                if (isset($query[$operator])) {
+                if(isset($query[$operator])) {
+                    if($operator == 'eq' && $param == 'title') {
+                        // 'eq' into 'like'
+                        $eloQuery[] = [$column, 'like', '%'.$query[$operator].'%'];
+                    } else {
+                        $eloQuery[] = [$column, $this->operatorMap[$operator], $query[$operator]];
 
-                    $eloQuery[] = [$column, $this->operatorMap[$operator], $query[$operator]];
+                    }
                 }
             }
         }
         return $eloQuery;
+
     }
 }
