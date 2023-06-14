@@ -20,7 +20,11 @@ class BookController extends Controller
         $query = $filter->transform($request);
         // dd($query);
         // dd(request()->query('title')['eq']);
-        $books = Book::where($query)->latest('id')->paginate(5);
+        if($request['hasAuthors']){
+            $books = Book::where($query)->with('author')->latest('id')->paginate(5);
+        } else {
+            $books = Book::where($query)->latest('id')->paginate(5);
+        }
         return new BookCollection($books);
     }
 
@@ -35,8 +39,10 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Book $book)
+    public function show(Book $book, Request $request)
     {
+        $book = $book->load('author');
+        // return $book;
         return new BookResource($book);
     }
 

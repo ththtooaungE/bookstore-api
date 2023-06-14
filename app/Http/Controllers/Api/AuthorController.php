@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Author;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AuthorResource;
 
 class AuthorController extends Controller
 {
@@ -13,7 +14,7 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        return Author::all();
+        return AuthorResource::collection(Author::latest('id')->paginate(10));
     }
 
     /**
