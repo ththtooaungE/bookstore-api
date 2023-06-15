@@ -6,7 +6,7 @@ use App\Filters\BookFilter;
 use App\Models\Book;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BookCollection;
-use App\Http\Resources\BookResource;
+use App\Http\Resources\BookShowResource;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -20,11 +20,8 @@ class BookController extends Controller
         $query = $filter->transform($request);
         // dd($query);
         // dd(request()->query('title')['eq']);
-        if($request['hasAuthors']){
-            $books = Book::where($query)->with('author')->latest('id')->paginate(5);
-        } else {
-            $books = Book::where($query)->latest('id')->paginate(5);
-        }
+        $books = Book::where($query)->with('author')->latest('id')->paginate(5);
+
         return new BookCollection($books);
     }
 
@@ -43,7 +40,7 @@ class BookController extends Controller
     {
         $book = $book->load('author');
         // return $book;
-        return new BookResource($book);
+        return new BookShowResource($book);
     }
 
     /**
