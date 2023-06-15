@@ -20,5 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['prefix'=>'v1','namespace' => 'App\Http\Controllers\Api'], function() {
     Route::apiResource('books', BookController::class);
-    Route::apiResource('authors', AuthorController::class); 
+    Route::apiResource('authors', AuthorController::class);
+    Route::apiResource('genres', GenreController::class);
+
 });
