@@ -21,10 +21,12 @@ class BookShowResource extends JsonResource
             'description' => $this->description,
             'stock' => $this->stock,
             'price' => $this->price,
-            'author' => new AuthorResource($this->whenLoaded('author')),
             'language' => $this->language,
             'page' => $this->page,
             'publicationDate' => $this->publication_date->format('d m Y'),
+            'author' => new AuthorResource($this->author),
+            'genres'=> GenreResource::collection($this->genres),
+
         ];
     }
 }

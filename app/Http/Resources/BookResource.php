@@ -19,8 +19,9 @@ class BookResource extends JsonResource
             'title' => $this->title,
             'condition' => $this->condition,
             'price' => $this->price,
-            'author' => new AuthorResource($this->whenLoaded('author')),
             'language' => $this->language,
+            'genres' => GenreResource::collection($this->genres),
+            'author' => new AuthorResource($this->author),
         ];
     }
 }
