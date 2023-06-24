@@ -28,9 +28,9 @@ class GenreController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Genre $genre)
     {
-        //
+        return new GenreResource($genre);
     }
 
     /**
