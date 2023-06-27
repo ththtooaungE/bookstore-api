@@ -28,10 +28,16 @@ class StoreBookRequest extends FormRequest
             'description' => ['required'],
             'stock' => ['required','integer'],
             'price' => ['required', 'integer'],
-            'authorId' => ['required', 'integer', 'exists:authors,id'],
+            'authorId' => ['required', 'integer', 'exists:authors,id'], //'author_id' or 'authorId' doesn't matter because merge() doesn't overwrite ,and add a new key.
             'language' => ['required', Rule::in(['English','Burmese','Korean','Chinese','Thai','Japanese','French'])],
             'page' =>['required', 'integer'],
-            'publicationDate' => ['required', 'date_format:Y-m-d']
+            'publicationDate' => ['required', 'date_format:Y-m-d'],
+            'genres' => ['required','max:5','array:0,1,2,3,4'],
+            'genres.0' => ['exists:genres,id'],
+            'genres.1' => ['exists:genres,id'],
+            'genres.2' => ['exists:genres,id'],
+            'genres.3' => ['exists:genres,id'],
+            'genres.4' => ['exists:genres,id'],
         ];
     }
 
