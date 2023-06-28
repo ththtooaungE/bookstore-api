@@ -62,6 +62,7 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
+        $book->genres()->detach();
         return $book->delete();
     }
 }
