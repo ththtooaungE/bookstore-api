@@ -51,6 +51,9 @@ class BookController extends Controller
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
+        if($request->input('genres')) {
+            $book->updateGenres($request->input('genres'));
+        }
         return $book->update($request->all());
     }
 

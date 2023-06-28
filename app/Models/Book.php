@@ -38,4 +38,8 @@ class Book extends Model
         return $this->genres()->attach($genres);
     }
 
+    public function updateGenres($genres) {
+        return $this->genres()->sync($genres);
+    }
+
 }
