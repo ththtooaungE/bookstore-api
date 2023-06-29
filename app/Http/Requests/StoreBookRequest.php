@@ -24,6 +24,7 @@ class StoreBookRequest extends FormRequest
     {
         return [
             'title' => ['required', 'max:255'],
+            'slug' => ['required', 'max:255', 'unique:books,slug'],
             'condition' => ['nullable', Rule::in([1,2,3,4,5])],
             'description' => ['required'],
             'stock' => ['required','integer'],
@@ -37,7 +38,7 @@ class StoreBookRequest extends FormRequest
             'genres.1' => ['exists:genres,id'],
             'genres.2' => ['exists:genres,id'],
             'genres.3' => ['exists:genres,id'],
-            'genres.4' => ['exists:genres,id'],
+            'genres.4' => ['exists:genres,id']
         ];
     }
 

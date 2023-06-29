@@ -26,6 +26,7 @@ class UpdateBookRequest extends FormRequest
         if($request->method() == "PUT") {
             return [
                 'title' => ['required', 'max:255'],
+                'slug' => ['required', 'max:255', 'unique:books,slug,'.$this->route('book')->id],
                 'condition' => ['nullable', Rule::in([1,2,3,4,5])],
                 'description' => ['required'],
                 'stock' => ['required','integer'],

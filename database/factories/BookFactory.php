@@ -20,6 +20,7 @@ class BookFactory extends Factory
         $languages = ['English', 'Burmese', 'Chinese', 'Korean', 'Japanese'];
         return [
             'title' => $this->faker->sentence(),
+            'slug' => $this->faker->slug(),
             'condition' => rand(1,5),
             'description' => $this->faker->realText(200),
             'stock' => $this->faker->randomDigit(0,50),

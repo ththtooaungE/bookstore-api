@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('slug')->unique();
             $table->enum('condition',[1,2,3,4,5])->nullable();
             $table->text('description');
             $table->integer('stock');

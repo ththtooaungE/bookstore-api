@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Models\Genre;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreGenreRequest;
+use App\Http\Requests\UpdateGenreRequest;
 use App\Http\Resources\GenreResource;
 
 class GenreController extends Controller
@@ -20,9 +22,9 @@ class GenreController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreGenreRequest $request)
     {
-        //
+        return new GenreResource(Genre::create($request->all()));
     }
 
     /**
@@ -36,16 +38,16 @@ class GenreController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateGenreRequest $request, Genre $genre)
     {
-        //
+        return $genre->update($request->all());
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Genre $genre)
     {
-        //
+        return $genre->delete();
     }
 }
