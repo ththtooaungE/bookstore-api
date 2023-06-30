@@ -11,6 +11,7 @@ use App\Http\Resources\BookCollection;
 use App\Http\Resources\BookResource;
 use App\Http\Resources\BookShowResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class BookController extends Controller
 {
@@ -32,7 +33,9 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
-        $book = Book::create($request->all());
+        $book = $request->validated();
+        $book['slug'] = Str::slug($request->input('title'));
+        $book = Book::create($book);
         $book->addGenres($request->genres);
         return new BookResource($book);
     }
@@ -51,10 +54,14 @@ class BookController extends Controller
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
+        $update = $request->validated();
+        if ($request->input('title')) {
+            $update['slug'] = Str::slug($request->input('title'));
+        }
         if($request->input('genres')) {
             $book->updateGenres($request->input('genres'));
         }
-        return $book->update($request->all());
+        return $book->update($update);
     }
 
     /**
