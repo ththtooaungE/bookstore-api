@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreGenreRequest;
 use App\Http\Requests\UpdateGenreRequest;
 use App\Http\Resources\GenreResource;
+use Illuminate\Support\Str;
 
 class GenreController extends Controller
 {
@@ -24,7 +25,9 @@ class GenreController extends Controller
      */
     public function store(StoreGenreRequest $request)
     {
-        return new GenreResource(Genre::create($request->all()));
+        $genre_data = $request->validated();
+        $genre_data['slug'] = Str::slug($request->input('name'));
+        return new GenreResource(Genre::create($genre_data));
     }
 
     /**
@@ -40,7 +43,9 @@ class GenreController extends Controller
      */
     public function update(UpdateGenreRequest $request, Genre $genre)
     {
-        return $genre->update($request->all());
+        $genre_data = $request->validated();
+        $genre_data['slug'] = Str::slug($request->input('name'));
+        return $genre->update($genre_data);
     }
 
     /**

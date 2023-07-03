@@ -23,16 +23,8 @@ class UpdateGenreRequest extends FormRequest
      */
     public function rules(Request $request): array
     {
-        if($request->method() == "PUT") {
-            return [
-                'name' => 'required|max:255|string|unique:genres,name,'.$this->route('genre')->id,
-                'slug' => 'required|max:255|string|unique:genres,slug,'.$this->route('genre')->id
-            ];
-        } else {
-            return [
-                'name' => 'sometimes|required|max:255|string|unique:genres,name,'.$this->route('genre')->id,
-                'slug' => 'sometimes|required|max:255|string|unique:genres,slug,'.$this->route('genre')->id
-            ];
-        }
+        return [
+            'name' => 'required|max:255|string|unique:genres,name,' . $this->route('genre')->id,
+        ];
     }
 }

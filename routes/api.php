@@ -22,5 +22,6 @@ Route::group(['prefix'=>'v1','namespace' => 'App\Http\Controllers\Api'], functio
     Route::apiResource('books', BookController::class);
     Route::apiResource('authors', AuthorController::class);
     Route::apiResource('genres', GenreController::class);
+    Route::apiResource('tags', TagController::class);
 
 });
